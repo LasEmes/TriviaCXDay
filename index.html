@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>TRIVIA DIGITAL • CXDAY</title>
+  <meta name="description" content="Trivia interactiva para tótem táctil horizontal en CXDAY. Resolvé casos reales del NPS.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Botón Pantalla Completa (Top Right) -->
+  <button id="btn-fullscreen" class="fullscreen-btn" title="Pantalla completa" aria-label="Pantalla completa">⛶</button>
+
+  <!-- App Main Layout Container -->
+  <div id="app-container">
+
+    <!-- ===================================================================
+         PANTALLA 0: ATTRACT SCREEN (Inicio Luminoso)
+         =================================================================== -->
+    <section id="screen-attract" class="screen-view active">
+      <div class="attract-badge">✨ TRIVIA DIGITAL • CXDAY</div>
+      <h1 class="attract-title">
+        Tus decisiones crean la <span class="highlight-red">experiencia del cliente</span>
+      </h1>
+      <p class="attract-subtitle">
+        Poné a prueba tus habilidades resolviendo situaciones reales basadas en comentarios del NPS.
+      </p>
+
+      <div id="btn-attract-start" class="touch-start-card">
+        <span>▶ Tocá para comenzar</span>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         PANTALLA 1: INSTRUCCIONES
+         =================================================================== -->
+    <section id="screen-intro" class="screen-view">
+      <div class="intro-white-card">
+        <div class="intro-header">
+          <span class="intro-tag">OBJETIVO DEL JUEGO</span>
+          <h2 class="intro-title">Experiencia centrada en el cliente 🎯</h2>
+        </div>
+
+        <p class="intro-lead">
+          En cada situación elegí la acción que mejor represente una experiencia centrada en el cliente.
+        </p>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-icon">📋</span>
+              <span class="step-number">PASO 01</span>
+            </div>
+            <p class="step-text">Resolverás <strong>3 situaciones reales</strong> extraídas de comentarios del NPS.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-icon">⚡</span>
+              <span class="step-number">PASO 02</span>
+            </div>
+            <p class="step-text">Cada decisión <strong>suma o resta puntos</strong> de experiencia CX.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-header">
+              <span class="step-icon">🏆</span>
+              <span class="step-number">PASO 03</span>
+            </div>
+            <p class="step-text">Al finalizar, descubrirás el <strong>tipo de cliente</strong> que generaste.</p>
+          </div>
+        </div>
+
+        <button id="btn-start-game" class="btn-primary">
+          ▶ Comenzar
+        </button>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         PANTALLA 2: GAMEPLAY (CASOS TRIVIA)
+         =================================================================== -->
+    <section id="screen-game" class="screen-view">
+      <!-- Barra Superior -->
+      <div class="game-top-bar">
+        <div class="game-meta">
+          <span class="case-badge" id="case-counter">CASO 1 DE 3</span>
+          <span class="driver-pill" id="driver-tag">🏷️ Driver: Materiales y equipos</span>
+        </div>
+        <div class="score-counter">
+          ⭐ Puntos CX: <span class="score-num" id="current-score">0</span>
+        </div>
+      </div>
+
+      <!-- Tarjeta del Comentario Real NPS -->
+      <div class="nps-comment-box">
+        <div class="quote-mark">“</div>
+        <div class="nps-comment-content">
+          <div class="nps-tag">Comentario real del cliente (NPS)</div>
+          <p class="nps-text" id="nps-comment-text">"Hace dos semanas solicité una sombrilla y todavía nadie me dio respuesta."</p>
+        </div>
+      </div>
+
+      <div class="question-title">¿Qué harías en esta situación?</div>
+
+      <!-- Opciones de Respuesta -->
+      <div class="options-grid" id="options-container">
+        <button class="option-button">
+          <div class="option-letter-badge">A</div>
+          <div class="option-text-content">Esperar a que el área de Materiales responda.</div>
+        </button>
+        <button class="option-button">
+          <div class="option-letter-badge">B</div>
+          <div class="option-text-content">Confirmar la solicitud, verificar el estado y dar una fecha estimada al cliente.</div>
+        </button>
+        <button class="option-button">
+          <div class="option-letter-badge">C</div>
+          <div class="option-text-content">Decirle que vuelva a solicitarla la próxima visita.</div>
+        </button>
+      </div>
+    </section>
+
+    <!-- Modal de Feedback Inmediato -->
+    <div class="feedback-overlay" id="feedback-overlay">
+      <div class="feedback-card-white" id="feedback-box">
+        <div class="feedback-header" id="feedback-title">
+          <span>🎉</span> ¡Decisión Centrada en el Cliente!
+        </div>
+        <p class="feedback-explanation" id="feedback-explanation">
+          Confirmar la solicitud y comprometer una fecha le da previsibilidad al cliente y resuelve el problema de fondo.
+        </p>
+        <div class="feedback-driver-box" id="feedback-driver-info">
+          Focus Driver: <strong>Materiales y equipos</strong>
+        </div>
+        <button id="btn-next-case" class="btn-next">Siguiente Caso ▶</button>
+      </div>
+    </div>
+
+    <!-- ===================================================================
+         PANTALLA 3: RESULTADOS & PERFIL DE CLIENTE
+         =================================================================== -->
+    <section id="screen-results" class="screen-view">
+      <div class="results-white-card">
+        <span class="result-tag">RESULTADO DE TU PARTIDA 🏆</span>
+        <div class="profile-avatar-badge" id="result-avatar">🌟</div>
+        <h2 class="profile-name promotor" id="result-title">CLIENTE PROMOTOR</h2>
+
+        <p class="profile-desc" id="result-desc">
+          ¡Excelente! Tus decisiones demostraron proactividad, claridad y solución de fondo, generando una experiencia memorable y duradera.
+        </p>
+
+        <div class="metrics-container">
+          <div class="metric-box">
+            <span class="metric-val" id="final-score-val">300</span>
+            <span class="metric-lbl">Puntos CX</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-val" id="final-correct-val">3 / 3</span>
+            <span class="metric-lbl">Aciertos</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-val" id="final-nps-val">NPS 10 🚀</span>
+            <span class="metric-lbl">Impacto Estimado</span>
+          </div>
+        </div>
+
+        <button id="btn-restart" class="btn-primary" style="margin-top: 0.5rem;">
+          🏠 Volver al inicio
+        </button>
+
+        <div class="reset-timer-notice">
+          ⏱️ El juego se reiniciará en <span id="reset-timer">30</span> segundos
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
