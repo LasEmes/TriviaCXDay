@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TRIVIA DIGITAL • CXDAY</title>
-  <meta name="description" content="Trivia interactiva para tótem táctil horizontal en CXDAY. Resolvé casos reales del NPS.">
+  <title>Trivia Nada Trivial • CX Day | Coca-Cola FEMSA</title>
+  <meta name="description" content="Trivia Nada Trivial para CX Day en Coca-Cola FEMSA. Resolvé casos reales del NPS.">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -16,15 +16,20 @@
   <div id="app-container">
 
     <!-- ===================================================================
-         PANTALLA 0: ATTRACT SCREEN (Inicio Luminoso)
+         PANTALLA 0: ATTRACT SCREEN (Inicio Con Logo Coca-Cola FEMSA)
          =================================================================== -->
     <section id="screen-attract" class="screen-view active">
-      <div class="attract-badge">✨ TRIVIA DIGITAL • CXDAY</div>
+      <!-- Logo Coca-Cola FEMSA -->
+      <img src="logo-cocacola-femsa.png" alt="Coca-Cola FEMSA" class="brand-logo-img">
+      
+      <div class="cxday-subtitle-tag">CX Day</div>
+
       <h1 class="attract-title">
-        Tus decisiones crean la <span class="highlight-red">experiencia del cliente</span>
+        Trivia Nada Trivial
       </h1>
+
       <p class="attract-subtitle">
-        Poné a prueba tus habilidades resolviendo situaciones reales basadas en comentarios del NPS.
+        Tus decisiones crean la <span class="highlight-red">experiencia del cliente</span>. Poné a prueba tus habilidades resolviendo situaciones reales del NPS.
       </p>
 
       <div id="btn-attract-start" class="touch-start-card">
@@ -37,8 +42,10 @@
          =================================================================== -->
     <section id="screen-intro" class="screen-view">
       <div class="intro-white-card">
+        <img src="logo-cocacola-femsa.png" alt="Coca-Cola FEMSA" class="brand-logo-small">
+
         <div class="intro-header">
-          <span class="intro-tag">OBJETIVO DEL JUEGO</span>
+          <span class="intro-tag">CX DAY • TRIVIA NADA TRIVIAL</span>
           <h2 class="intro-title">Experiencia centrada en el cliente 🎯</h2>
         </div>
 
@@ -83,6 +90,7 @@
       <!-- Barra Superior -->
       <div class="game-top-bar">
         <div class="game-meta">
+          <img src="logo-cocacola-femsa.png" alt="Coca-Cola FEMSA" class="brand-logo-tiny">
           <span class="case-badge" id="case-counter">CASO 1 DE 3</span>
           <span class="driver-pill" id="driver-tag">🏷️ Driver: Materiales y equipos</span>
         </div>
@@ -140,7 +148,8 @@
          =================================================================== -->
     <section id="screen-results" class="screen-view">
       <div class="results-white-card">
-        <span class="result-tag">RESULTADO DE TU PARTIDA 🏆</span>
+        <img src="logo-cocacola-femsa.png" alt="Coca-Cola FEMSA" class="brand-logo-small">
+        <span class="result-tag">RESULTADO DE TU PARTIDA • CX DAY 🏆</span>
         <div class="profile-avatar-badge" id="result-avatar">🌟</div>
         <h2 class="profile-name promotor" id="result-title">CLIENTE PROMOTOR</h2>
 
