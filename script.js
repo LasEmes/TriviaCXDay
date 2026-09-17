@@ -227,7 +227,7 @@ function loadCase(index) {
   if (!caseData) return;
 
   document.getElementById('case-counter').textContent = `CASO ${index + 1} DE 3`;
-  document.getElementById('driver-tag').textContent = `🏷️ Driver: ${caseData.driver}`;
+  document.getElementById('driver-tag').textContent = `Driver: ${caseData.driver}`;
   document.getElementById('nps-comment-text').textContent = `"${caseData.comment}"`;
 
   currentShuffledOptions = shuffleArray(caseData.options);
@@ -278,10 +278,10 @@ function showFeedbackOverlay(isCorrect, caseData) {
 
   if (isCorrect) {
     box.className = 'feedback-card-white correct';
-    title.innerHTML = '<span>🎉</span> ¡Decisión Centrada en el Cliente!';
+    title.textContent = '¡Decisión Centrada en el Cliente!';
   } else {
     box.className = 'feedback-card-white incorrect';
-    title.innerHTML = '<span>💡</span> Decisión Subóptima';
+    title.textContent = 'Decisión Subóptima';
   }
 
   explanation.textContent = caseData.explanation;
@@ -316,23 +316,23 @@ function showResultsScreen() {
   document.getElementById('final-correct-val').textContent = `${correctCount} / 3`;
 
   if (score === 300) {
-    avatar.textContent = '🌟';
+    if (avatar) avatar.style.display = 'none';
     title.textContent = 'CLIENTE PROMOTOR ENTUSIASTA';
     title.className = 'profile-name promotor';
     desc.textContent = '¡Excelente! Tus decisiones demostraron proactividad, claridad y solución de fondo, generando una experiencia memorable y duradera.';
-    document.getElementById('final-nps-val').textContent = 'NPS 10 🚀';
+    document.getElementById('final-nps-val').textContent = 'NPS 10';
   } else if (score === 200) {
-    avatar.textContent = '🙂';
+    if (avatar) avatar.style.display = 'none';
     title.textContent = 'CLIENTE SATISFECHO';
     title.className = 'profile-name satisfecho';
     desc.textContent = 'Resolviste positivamente la mayoría de las situaciones. Con un seguimiento más proactivo lograrás fidelizar por completo al cliente.';
-    document.getElementById('final-nps-val').textContent = 'NPS 8 👍';
+    document.getElementById('final-nps-val').textContent = 'NPS 8';
   } else {
-    avatar.textContent = '⚠️';
+    if (avatar) avatar.style.display = 'none';
     title.textContent = 'CLIENTE DETRACTOR';
     title.className = 'profile-name detractor';
     desc.textContent = 'Las respuestas imprecisas o pasivas no resuelven la insatisfacción. Ante un comentario del NPS, la acción inmediata es clave para revertir la experiencia.';
-    document.getElementById('final-nps-val').textContent = 'NPS 5 ⚠️';
+    document.getElementById('final-nps-val').textContent = 'NPS 5';
   }
 }
 
