@@ -11,11 +11,11 @@ const ALL_CASES = [
     prompt: "¿Qué harías?",
     driver: "Materiales y equipos",
     options: [
-      { text: "Esperar a que el área de Materiales responda.", isCorrect: false },
-      { text: "Confirmar la solicitud, verificar el estado y dar una fecha estimada al cliente.", isCorrect: true },
-      { text: "Decirle que vuelva a solicitarla la próxima visita.", isCorrect: false }
+      { text: "Esperar a que el área encargada de materiales responda y recién ahí contactar al cliente", isCorrect: false },
+      { text: "Decirle al cliente que no va a ser posible brindarle materiales por su volumen de compra", isCorrect: false },
+      { text: "Hacerle seguimiento a la solicitud con el área correspondiente, en paralelo comentarle al cliente que se tiene presente su pedido. En caso de no tener disponibilidad, brindar algún otro tipo de material.", isCorrect: true }
     ],
-    explanation: "Verificar el estado de la solicitud y comprometer una fecha le da previsibilidad al cliente y resuelve la falta de respuesta."
+    explanation: "Hacer seguimiento activo con el área interna, mantener informado al cliente y brindar alternativas de material en caso de indisponibilidad demuestra verdadero compromiso y resolución."
   },
   {
     id: 2,
@@ -184,7 +184,7 @@ function showScreen(screenId) {
     target.classList.add('active');
     currentScreen = screenId;
   }
-  
+
   if (screenId === 'screen-results') {
     startResultsResetCountdown();
   } else {
@@ -212,10 +212,10 @@ function startNewGame() {
   score = 0;
   correctCount = 0;
   currentCaseIndex = 0;
-  
+
   const shuffledCases = shuffleArray(ALL_CASES);
   activeGameCases = shuffledCases.slice(0, 3);
-  
+
   updateScoreDisplay();
   showScreen('screen-game');
   loadCase(currentCaseIndex);
@@ -254,7 +254,7 @@ function loadCase(index) {
 // Selección de Respuesta
 function handleOptionSelection(selectedOption, caseData) {
   const isCorrect = selectedOption.isCorrect;
-  
+
   if (isCorrect) {
     score += 100;
     correctCount++;
@@ -281,7 +281,7 @@ function showFeedbackOverlay(isCorrect, caseData) {
     title.textContent = '¡Decisión Centrada en el Cliente!';
   } else {
     box.className = 'feedback-card-white incorrect';
-    title.textContent = 'Decisión Subóptima';
+    title.textContent = '¡Pensemos nuevamente como cliente!';
   }
 
   explanation.textContent = caseData.explanation;
@@ -311,35 +311,35 @@ function showResultsScreen() {
   const avatar = document.getElementById('result-avatar');
   const title = document.getElementById('result-title');
   const desc = document.getElementById('result-desc');
+  const npsVal = document.getElementById('final-nps-val');
 
   document.getElementById('final-score-val').textContent = score;
   document.getElementById('final-correct-val').textContent = `${correctCount} / 3`;
 
-  if (score === 300) {
-    if (avatar) avatar.style.display = 'none';
-    title.textContent = 'CLIENTE PROMOTOR ENTUSIASTA';
-    title.className = 'profile-name promotor';
-    desc.textContent = '¡Excelente! Tus decisiones demostraron proactividad, claridad y solución de fondo, generando una experiencia memorable y duradera.';
-    document.getElementById('final-nps-val').textContent = 'NPS 10';
-  } else if (score === 200) {
-    if (avatar) avatar.style.display = 'none';
-    title.textContent = 'CLIENTE SATISFECHO';
-    title.className = 'profile-name satisfecho';
-    desc.textContent = 'Resolviste positivamente la mayoría de las situaciones. Con un seguimiento más proactivo lograrás fidelizar por completo al cliente.';
-    document.getElementById('final-nps-val').textContent = 'NPS 8';
+  if (avatar) avatar.style.display = 'none';
+
+  if (correctCount === 3) {
+    title.textContent = 'Nivel alto de cultura centrada en el cliente';
+    title.className = 'profile-name level-high';
+    desc.textContent = '¡Excelente desempeño! Demostraste un nivel alto de preparación, proactividad y enfoque para resolver las necesidades del cliente.';
+    if (npsVal) npsVal.textContent = 'Nivel Alto';
+  } else if (correctCount === 2) {
+    title.textContent = 'Buen nivel de preparación, con oportunidades de mejora';
+    title.className = 'profile-name level-good';
+    desc.textContent = 'Demostraste un buen nivel de respuesta ante situaciones reales, con oportunidades de mejora para optimizar la experiencia en cada punto de contacto.';
+    if (npsVal) npsVal.textContent = 'Buen Nivel';
   } else {
-    if (avatar) avatar.style.display = 'none';
-    title.textContent = 'CLIENTE DETRACTOR';
-    title.className = 'profile-name detractor';
-    desc.textContent = 'Las respuestas imprecisas o pasivas no resuelven la insatisfacción. Ante un comentario del NPS, la acción inmediata es clave para revertir la experiencia.';
-    document.getElementById('final-nps-val').textContent = 'NPS 5';
+    title.textContent = 'Nivel en desarrollo';
+    title.className = 'profile-name level-developing';
+    desc.textContent = 'Tu nivel se encuentra en desarrollo. Existen oportunidades para fortalecer la gestión de las necesidades del cliente y priorizar soluciones proactivas y de fondo.';
+    if (npsVal) npsVal.textContent = 'En Desarrollo';
   }
 }
 
 // Temporizadores de Inactividad
 function resetTotemIdleTimer() {
   if (idleTimer) clearTimeout(idleTimer);
-  
+
   if (currentScreen !== 'screen-attract') {
     idleTimer = setTimeout(() => {
       resetToAttractScreen();
@@ -356,7 +356,7 @@ function startResultsResetCountdown() {
   resetCountdownTimer = setInterval(() => {
     resetCountdownSeconds--;
     if (timerSpan) timerSpan.textContent = resetCountdownSeconds;
-    
+
     if (resetCountdownSeconds <= 0) {
       stopResultsResetCountdown();
       resetToAttractScreen();

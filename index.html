@@ -16,13 +16,12 @@
   <div id="app-container">
 
     <!-- ===================================================================
-         PANTALLA 0: ATTRACT SCREEN (Inicio Con Logo Coca-Cola FEMSA)
+         PANTALLA 0: ATTRACT SCREEN (Inicio Con Logo CX-DAY 2026)
          =================================================================== -->
     <section id="screen-attract" class="screen-view active">
-      <!-- Logo Coca-Cola FEMSA -->
-      <img src="logo-cocacola-femsa.png" alt="Coca-Cola FEMSA" class="brand-logo-img">
-      
-      <div class="cxday-subtitle-tag">CX Day</div>
+      <div class="logo-hero-container">
+        <img src="logo-cxday-2026.jpg" alt="CX-DAY 2026 - Poner al Cliente Primero" class="attract-cx-logo">
+      </div>
 
       <h1 class="attract-title">
         Trivia Nada Trivial
@@ -42,7 +41,7 @@
          =================================================================== -->
     <section id="screen-intro" class="screen-view">
       <div class="intro-white-card">
-        <img src="logo-cocacola-femsa.png" alt="Coca-Cola FEMSA" class="brand-logo-small">
+        <img src="logo-cxday-2026.jpg" alt="CX-DAY 2026" class="brand-logo-small">
 
         <div class="intro-header">
           <span class="intro-tag">CX DAY • TRIVIA NADA TRIVIAL</span>
@@ -70,7 +69,7 @@
             <div class="step-header">
               <span class="step-number">PASO 03</span>
             </div>
-            <p class="step-text">Al finalizar, descubrirás el <strong>tipo de cliente</strong> que generaste.</p>
+            <p class="step-text">Al finalizar, descubrirás <strong>qué tan preparado estás</strong> para gestionar las necesidades de nuestros clientes.</p>
           </div>
         </div>
 
@@ -91,6 +90,7 @@
           <span class="case-badge" id="case-counter">CASO 1 DE 3</span>
           <span class="driver-pill" id="driver-tag">Driver: Materiales y equipos</span>
         </div>
+        
         <div class="score-counter">
           Puntos CX: <span class="score-num" id="current-score">0</span>
         </div>
@@ -111,15 +111,15 @@
       <div class="options-grid" id="options-container">
         <button class="option-button">
           <div class="option-letter-badge">A</div>
-          <div class="option-text-content">Esperar a que el área de Materiales responda.</div>
+          <div class="option-text-content">Esperar a que el área encargada de materiales responda y recién ahí contactar al cliente</div>
         </button>
         <button class="option-button">
           <div class="option-letter-badge">B</div>
-          <div class="option-text-content">Confirmar la solicitud, verificar el estado y dar una fecha estimada al cliente.</div>
+          <div class="option-text-content">Decirle al cliente que no va a ser posible brindarle materiales por su volumen de compra</div>
         </button>
         <button class="option-button">
           <div class="option-letter-badge">C</div>
-          <div class="option-text-content">Decirle que vuelva a solicitarla la próxima visita.</div>
+          <div class="option-text-content">Hacerle seguimiento a la solicitud con el área correspondiente, en paralelo comentarle al cliente que se tiene presente su pedido. En caso de no tener disponibilidad, brindar algún otro tipo de material.</div>
         </button>
       </div>
     </section>
@@ -141,16 +141,16 @@
     </div>
 
     <!-- ===================================================================
-         PANTALLA 3: RESULTADOS & PERFIL DE CLIENTE
+         PANTALLA 3: RESULTADOS & NIVEL DE CULTURA CX
          =================================================================== -->
     <section id="screen-results" class="screen-view">
       <div class="results-white-card">
-        <img src="logo-cocacola-femsa.png" alt="Coca-Cola FEMSA" class="brand-logo-small">
-        <span class="result-tag">RESULTADO DE TU PARTIDA • CX DAY</span>
-        <h2 class="profile-name promotor" id="result-title">CLIENTE PROMOTOR</h2>
+        <img src="logo-cxday-2026.jpg" alt="CX Day 2026" class="brand-logo-small">
+        <span class="result-tag">NIVEL DE PREPARACIÓN EN CULTURA CENTRADA EN EL CLIENTE</span>
+        <h2 class="profile-name promotor" id="result-title">NIVEL ALTO DE CULTURA CENTRADA EN EL CLIENTE</h2>
 
         <p class="profile-desc" id="result-desc">
-          ¡Excelente! Tus decisiones demostraron proactividad, claridad y solución de fondo, generando una experiencia memorable y duradera.
+          ¡Excelente desempeño! Demostraste un nivel alto de preparación, proactividad y enfoque en resolver la necesidad de fondo del cliente.
         </p>
 
         <div class="metrics-container">
@@ -163,8 +163,8 @@
             <span class="metric-lbl">Aciertos</span>
           </div>
           <div class="metric-box">
-            <span class="metric-val" id="final-nps-val">NPS 10</span>
-            <span class="metric-lbl">Impacto Estimado</span>
+            <span class="metric-val" id="final-nps-val">Alto</span>
+            <span class="metric-lbl">Nivel Demostrado</span>
           </div>
         </div>
 
