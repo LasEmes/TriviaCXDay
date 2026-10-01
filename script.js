@@ -115,6 +115,9 @@ const ALL_CASES = [
   }
 ];
 
+// URL del Google Apps Script
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN32HZ3g6Jbiutd8wlDNnWMsKu4hCDRzznFvwQ2yvDH1lofCxWp2Li3deFmoZYQKwY/exec';
+
 // Estado de la Aplicación
 let currentScreen = 'screen-attract';
 let activeGameCases = [];
@@ -122,6 +125,11 @@ let currentCaseIndex = 0;
 let score = 0;
 let correctCount = 0;
 let currentShuffledOptions = [];
+
+// Seguimiento anónimo de la partida
+let currentGameId = '';
+let gameResponses = [];
+let hasSubmittedCurrentGame = false;
 
 // Temporizadores de Tótem
 let idleTimer = null;
@@ -213,6 +221,11 @@ function startNewGame() {
   correctCount = 0;
   currentCaseIndex = 0;
 
+  // Generar ID anónimo único para cada partida
+  currentGameId = 'cx_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+  gameResponses = [];
+  hasSubmittedCurrentGame = false;
+
   const shuffledCases = shuffleArray(ALL_CASES);
   activeGameCases = shuffledCases.slice(0, 3);
 
@@ -259,6 +272,15 @@ function handleOptionSelection(selectedOption, caseData) {
     score += 100;
     correctCount++;
   }
+
+  // Guardar respuesta del caso actual
+  gameResponses[currentCaseIndex] = {
+    caseId: caseData.id,
+    comment: caseData.comment,
+    driver: caseData.driver,
+    selectedText: selectedOption.text,
+    isCorrectStr: isCorrect ? 'Sí' : 'No'
+  };
 
   updateScoreDisplay();
   showFeedbackOverlay(isCorrect, caseData);
@@ -333,6 +355,45 @@ function showResultsScreen() {
     title.className = 'profile-name level-developing';
     desc.textContent = 'Tu nivel se encuentra en desarrollo. Existen oportunidades para fortalecer la gestión de las necesidades del cliente y priorizar soluciones proactivas y de fondo.';
     if (npsVal) npsVal.textContent = 'En Desarrollo';
+  }
+
+  // Enviar resultados a Google Sheets (Asíncrono y No Bloqueante)
+  sendGameResultsToGoogleSheets();
+}
+
+// Enviar datos de la partida a Google Sheets mediante Google Apps Script
+function sendGameResultsToGoogleSheets() {
+  if (hasSubmittedCurrentGame || !gameResponses || gameResponses.length < 3) return;
+  hasSubmittedCurrentGame = true;
+
+  const payload = {
+    idPartida: currentGameId,
+    pregunta1: gameResponses[0] ? gameResponses[0].comment : '',
+    respuesta1: gameResponses[0] ? gameResponses[0].selectedText : '',
+    correcta1: gameResponses[0] ? gameResponses[0].isCorrectStr : 'No',
+    pregunta2: gameResponses[1] ? gameResponses[1].comment : '',
+    respuesta2: gameResponses[1] ? gameResponses[1].selectedText : '',
+    correcta2: gameResponses[1] ? gameResponses[1].isCorrectStr : 'No',
+    pregunta3: gameResponses[2] ? gameResponses[2].comment : '',
+    respuesta3: gameResponses[2] ? gameResponses[2].selectedText : '',
+    correcta3: gameResponses[2] ? gameResponses[2].isCorrectStr : 'No',
+    aciertos: correctCount,
+    puntaje: score
+  };
+
+  try {
+    fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8'
+      },
+      body: JSON.stringify(payload)
+    }).catch(err => {
+      console.warn('Google Sheets sync notice (non-blocking):', err);
+    });
+  } catch (e) {
+    console.warn('Google Sheets fetch exception (non-blocking):', e);
   }
 }
 
